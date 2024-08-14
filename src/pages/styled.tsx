@@ -71,6 +71,8 @@ const Title = styled('p')`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
+  margin: 0;
+    
 `;
 
 const SubDescriptions = styled('div')`
@@ -83,6 +85,7 @@ const SubDescriptions = styled('div')`
 
 const Description = styled('p')`
   color: lightgray;
+    margin: 0;
 `;
 
 const Dot = styled('div')`
@@ -96,6 +99,7 @@ const Dot = styled('div')`
   background: lightgray;
 `;
 
+// const DraggableButton = styled(motion.button)`
 const DraggableButton = styled('button')`
   width: 24px;
   height: 100%;
@@ -103,6 +107,18 @@ const DraggableButton = styled('button')`
 `;
 
 const DeleteButton = styled(motion.div)`
+  display: grid;
+  place-content: center;
+  position: absolute;
+  top: 0;
+  right: 65px;
+  height: 100%;
+  width: 64px;
+  aspect-ratio: 1 /1;
+  background: red;
+`;
+
+const DeleteButton2 = styled(motion.div)`
   display: grid;
   place-content: center;
   position: absolute;
@@ -138,5 +154,6 @@ export {
     Dot,
     DraggableButton,
     DeleteButton,
+    DeleteButton2,
     DeleteLabel,
 };
