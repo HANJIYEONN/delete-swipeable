@@ -71,6 +71,7 @@ const ListItem = ({ value, onRequestDelete }: ListItemProp) => {
 
     const [deleteButtonRef, { width: deleteButtonWidth }] = useMeasure();
 
+
     const itemX = useMotionValue(0);
     const backgroundColor = useTransform(
         itemX,
@@ -82,30 +83,28 @@ const ListItem = ({ value, onRequestDelete }: ListItemProp) => {
     const deleteAnimateState = isDeleteShow ? 'appear' : 'disappear';
 
     useEffect(() => {
-        console.log("?")
         itemX.on('change', (v) => {
             const isOverThreshold = v < -deleteButtonWidth / 2;
-
-            console.log("deleteButtonWidth",deleteButtonWidth)
-            console.log("v",v)
-            console.log("isOverThreshold",isOverThreshold)
-
             setIsDeleteShow(isOverThreshold);
         });
     }, [itemX, deleteButtonWidth]);
 
+
+
     const handleDragEnd = () => {
         const isOverThreshold = itemX.get() < -deleteButtonWidth / 2;
+        const isOverThresholdRight = itemX.get() > deleteButtonWidth / 2;
 
         if (isOverThreshold) {
             animateSwipeToLeft();
+        }else if(isOverThresholdRight){
+            animateSwipeToRight();
         } else {
             animateSwipeToOrigin();
         }
     };
 
     const handleDraggableButtonPointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
-        console.log("e",isDeleteShow)
 
         if (isDeleteShow) return;
 
@@ -113,7 +112,9 @@ const ListItem = ({ value, onRequestDelete }: ListItemProp) => {
         animateBgColorToHighlight(true);
     };
 
-    const animateSwipeToLeft = () => animateSwipe(swipeAnimateRef.current, { x: -deleteButtonWidth });
+    //땡겼다가 놓았을때 뒤에 보이는 공간
+    const animateSwipeToLeft = () => animateSwipe(swipeAnimateRef.current, { x: -deleteButtonWidth*2.4 });
+    const animateSwipeToRight = () => animateSwipe(swipeAnimateRef.current, { x: deleteButtonWidth });
 
     const animateSwipeToOrigin = () => animateSwipe(swipeAnimateRef.current, { x: 0 });
 
@@ -125,8 +126,6 @@ const ListItem = ({ value, onRequestDelete }: ListItemProp) => {
         );
 
     const animateBgColorToNormal = () => {
-        console.log("e?")
-
         animateBgColor(bgColorAnimateRef.current, {backgroundColor: bgColor.normal});
     }
     return (
@@ -157,7 +156,7 @@ const ListItem = ({ value, onRequestDelete }: ListItemProp) => {
                     drag="x"
                     dragControls={swipeDragControls}
                     dragListener={false}
-                    dragConstraints={{ left: -deleteButtonWidth, right: 0 }}
+                    dragConstraints={{ left: -deleteButtonWidth*2.5,right: deleteButtonWidth }}
                     dragElastic={0.1}
                     onDragEnd={handleDragEnd}
                     ref={swipeAnimateRef}
@@ -189,7 +188,7 @@ const ListItem = ({ value, onRequestDelete }: ListItemProp) => {
                         <DraggableButton
                             onPointerDown={handleDraggableButtonPointerDown}
                             onPointerUp={() => animateBgColorToNormal()}
-                            // drag="y" // x축으로만 움직일 수 있게 설정
+                            // drag="y" // y축으로만 움직일 수 있게 설정
                         />
                     </ListItemInner>
                 </SwipeableContainer>

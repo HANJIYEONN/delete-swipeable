@@ -1,12 +1,7 @@
-import { HTMLAttributes, forwardRef } from 'react';
 import { styled } from '@mui/system';
-import { motion,MotionProps } from 'framer-motion';
-import {MusicItem} from "./ListItem.tsx";
+import { motion,Reorder} from 'framer-motion';
 
 
-type ListItemInnerProps = HTMLAttributes<HTMLDivElement> & MotionProps & {
-    value: MusicItem;
-};
 
 const Container = styled(motion.div)`
   position: relative;
@@ -22,15 +17,15 @@ const SwipeableContainer = styled(motion.div)`
   height: 100%;
 `;
 
-const ListItemInner = styled('div')<ListItemInnerProps>`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 8px 12px;
-  background: #2b2b2b;
+const ListItemInner = styled(Reorder.Item)`
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 8px 12px;
+    background: #2b2b2b;
 `;
 
 const ListItemContent = styled('div')`
@@ -100,10 +95,10 @@ const Dot = styled('div')`
 `;
 
 // const DraggableButton = styled(motion.button)`
-const DraggableButton = styled('button')`
-  width: 24px;
-  height: 100%;
-  cursor: grab;
+const DraggableButton = styled(motion.button)`
+    width: 24px;
+    height: 100%;
+    cursor: grab;
 `;
 
 const DeleteButton = styled(motion.div)`
@@ -136,14 +131,15 @@ const DeleteLabel = styled(motion.p)`
   font-weight: 300;
 `;
 
-const ListItemInnerComponent = forwardRef<HTMLDivElement, ListItemInnerProps>(({ value, ...props }, ref) => (
-    <ListItemInner value={value} {...props} ref={ref} />
-));
+// const ListItemInnerComponent = forwardRef<HTMLDivElement, ListItemInnerProps>(({ value, ...props }, ref) => (
+//     <ListItemInner value={value} {...props} ref={ref} />
+// ));
 
 export {
     Container,
     SwipeableContainer,
-    ListItemInnerComponent as ListItemInner,
+    // ListItemInnerComponent as ListItemInner,
+    ListItemInner,
     ListItemContent,
     ThumbnailWrapper,
     Thumbnail,
