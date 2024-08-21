@@ -12,7 +12,7 @@ const ListBox = styled(Reorder.Group)`
 
 
 /** Component */
-import ListItem from './ListItem';
+import ListItem from './ListItem.tsx';
 
 /** Animate */
 import { AnimatePresence } from 'framer-motion';

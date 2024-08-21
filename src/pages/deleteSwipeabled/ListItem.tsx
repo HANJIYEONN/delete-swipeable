@@ -17,7 +17,7 @@ import {
     DraggableButton,
     DeleteButton,
     DeleteLabel, DeleteButton2,
-} from './styled';
+} from './styled.tsx';
 
 /** Animate */
 import {
@@ -33,7 +33,7 @@ import {
     deleteButtonVariants,
     deleteLabelVariants,
     swipeableContainerVariant,
-} from './animationVariants';
+} from './animationVariants.ts';
 
 /** Lib */
 import useMeasure from 'react-use-measure';

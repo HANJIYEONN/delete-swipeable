@@ -1,7 +1,7 @@
 import {Box} from "@mui/material";
 import { useState } from "react";
 
-import SwipeablePlaylist from "./SwipeablePlaylist";
+import SwipeablePlaylist from "./SwipeablePlaylist.tsx";
 
 
 const playlist = [
